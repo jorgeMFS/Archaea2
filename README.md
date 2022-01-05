@@ -8,6 +8,7 @@
 Get Archaea project using:
 ```bash
 git clone git@github.com:jorgeMFS/Archaea2.git
+cd Archaea2
 chmod +x run.sh
 bash run.sh 
 ```
@@ -15,8 +16,8 @@ bash run.sh
 ## Using Docker
 
 ```sh
-git clone https://github.com/jorgeMFS/Archaea.git
-cd Archaea
+git clone git@github.com:jorgeMFS/Archaea2.git
+cd Archaea2
 docker-compose build
 docker-compose up -d && docker exec -it archaea bash && docker-compose down
 ```
