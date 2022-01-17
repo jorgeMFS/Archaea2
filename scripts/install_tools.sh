@@ -1,4 +1,5 @@
 #!/bin/bash
+#
 
 Check_Installation() {
     if ! [ -x "$(command -v "$1")" ]; then
@@ -9,23 +10,19 @@ Check_Installation() {
     fi
 }
 
-echo "Start Installation..."
 
-conda install -c cobilab gto --yes
-conda install -y -c bioconda geco3 --yes
-conda install -c bioconda ac --yes
-conda install -c bioconda entrez-direct --yes
-conda install -c https://conda.anaconda.org/biocore scikit-bio  --yes
+echo -e "\033[1mStart Tool Installation...\033[0m"
+#TODO
 
-#
-pip install openpyxl
-pip install pandas
-pip install numpy
-pip install sklearn
-pip install xgboost
-
-
-Check_Installation "gto";
+conda install -y -c bioconda geco3
 Check_Installation "GeCo3";
-Check_Installation "AC";
+conda install -c bioconda entrez-direct --yes
 Check_Installation "efetch";
+conda install -c cobilab gto --yes 
+Check_Installation "gto";
+conda install -c bioconda ac --yes
+Check_Installation "ac";
+conda install -c conda-forge ncbi-datasets-cli
+
+
+echo -e "\033[1;32mSuccessfully installed tools!\033[0m";

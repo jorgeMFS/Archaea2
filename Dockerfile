@@ -9,6 +9,8 @@ RUN apt-get update -y && apt-get install -y bc
 
 RUN apt-get install -y bc
 
+sudo apt-get install curl
+
 RUN apt-get install -y unzip
 
 RUN apt-get install -y jq
