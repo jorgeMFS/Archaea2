@@ -104,8 +104,16 @@ function SEQ_FEATURES(){
             len_x=$(wc -m <"$genome_file");
             gto_genomic_count_bases < "$genome_file" > GCTA; 
             nbases=$(sed "2q;d" GCTA | awk -F ":" '{print $2}');
+            nA=$(sed "3q;d" GCTA | awk -F ":" '{print $2}');
             nC=$(sed "4q;d" GCTA | awk -F ":" '{print $2}');
             nG=$(sed "5q;d" GCTA | awk -F ":" '{print $2}');
+            nT=$(sed "6q;d" GCTA | awk -F ":" '{print $2}');
+            
+            A_p=$(echo "scale=10; (${nA}) / ${nbases}" | bc -l | awk '{printf "%f", $0}');
+            C_p=$(echo "scale=10; (${nC}) / ${nbases}" | bc -l | awk '{printf "%f", $0}');
+            G_p=$(echo "scale=10; (${nC}) / ${nbases}" | bc -l | awk '{printf "%f", $0}');
+            T_p=$(echo "scale=10; (${nT}) / ${nbases}" | bc -l | awk '{printf "%f", $0}');
+
             GC_p=$(echo "scale=10; (${nC}+${nG}) / ${nbases}" | bc -l | awk '{printf "%f", $0}');
             GeCo3 -v -l 3 "$genome_file" 1> report_stdout_nc 2> report_stderr_nc
             BPS1=$(grep "Total bytes" report_stdout_nc | awk '{ print $6; }');
@@ -113,14 +121,12 @@ function SEQ_FEATURES(){
             len_p=$(wc -m <"$protein_file")
             a=$(AC -v -l 3 "$protein_file" | sed '3,4d' | sed 'N;s/\n/ /')
             ndc=$(echo $a | cut -d ' ' -f16);
-
-            echo -e "$name\t$len_x\t$GC_p\t$entropy\t$len_p\t$ndc " >> ../reports/"$1"
+            echo -e "${name}\t${len_x}\t${A_p}\t${C_p}\t${G_p}\t${T_p}\t${GC_p}\t${entropy}\t${len_p}\t${ndc}" >> ../reports/"$1"
             fi
         fi
     done
     rm GCTA report_stdout_nc report_stderr_nc
 }
-
 
 # Get NC, Sequence Length and GC-Content.
 # Classification
@@ -131,7 +137,6 @@ if [ ! -d "$DATASET_DIR" ]; then echo "Please run download_dataset.sh"; exit; fi
 PREPROCESS_FILES
 SEQ_FEATURES REPORTS_SEQ_FEATURES
 GenomeInfo "A"
-exit;
 cd "../python_src/" || exit
 python3 create_classification_dataset.py
 python3 classification.py

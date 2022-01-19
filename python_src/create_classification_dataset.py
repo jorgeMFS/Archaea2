@@ -17,7 +17,7 @@ def read_to_list(path):
     return list_of_lists
 
 def process_feature_lst(lst):
-    return [[x[0],int(x[1]),float(x[2]),float(x[3]),int(x[4]),float(x[5])] for x in lst] 
+    return [[x[0],int(x[1]),float(x[2]),float(x[3]),float(x[4]),float(x[5]),float(x[6]),float(x[7]), int(x[8]), float(x[9])] for x in lst] 
 
 def restructure_organism_list(lst):  
     return [[x[0]]+x[2].split("; ") for x in lst]
@@ -40,6 +40,7 @@ def filter_insufficient_samples(lst, lst_tx, min_number_samples):
 def classification_structure(lst,map_lst):
     tax=["Phylum","Class","Order","Family","Genus"]
     #Species,  Unknown not considerered
+    
     new_lst=[]
     for tx in tax:
         clss_lst=[]
@@ -49,7 +50,7 @@ def classification_structure(lst,map_lst):
         for l_tx, cnt in zip(lst_tx, list(range(len(lst_tx)))):
             for x in lst:
                 if l_tx in x:
-                    clss_lst.append(x[:5])
+                    clss_lst.append(x[:9])
                     labels.append(cnt)
         clss_lst=np.array(clss_lst)
         labels=np.array(labels).astype('int32')
