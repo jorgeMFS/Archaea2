@@ -252,8 +252,8 @@ def classification(relative_path):
     taxonomy=["Phylum","Class","Order","Family","Genus"]
     iterations=50
 
-    acc_xgboost=[["Classification","N. Classes","Samples","NC","NC_gen+NC_pr","SL+GC+NC(proteome)","SL+GC+NC(genome)","All(genome)","All"]]
-    f1_xgboost=[["Classification","N. Classes","Samples","NC","NC_gen+NC_pr","SL+GC+NC(proteome)","SL+GC+NC(genome)","All(genome)","All"]]
+    acc_xgboost=[["Classification","N. Classes","Samples","NC","NC_gen+NC_pr","SL+NC(proteome)","All(genome)","All"]]
+    f1_xgboost=[["Classification","N. Classes","Samples","NC","NC_gen+NC_pr","SL+NC(proteome)","All(genome)","All"]]
     acc_other=[["Classification","N. Classes","Samples","LDA","GNB","SVM","KNN","XGB"]]
     f1_other=[["Classification","N. Classes","Samples","LDA","GNB","SVM","KNN","XGB"]]
     p_hit=[]
@@ -264,18 +264,16 @@ def classification(relative_path):
         data, labels = read_data_file(x_file,y_file)
         nc_data=data[:,[6]]
         ncs_data=data[:,[6,8]]
-        sq_gc_nc_genome=data[:,[0,5,6]]
         all_genome=data[:,:7]
         sq_nc_protein=data[:,7:]
-        
         random_hit_per=determine_random_hit_percentage(labels)
         #xgboost Classification
         ac_1f, f1_1f, _ = xgboost_classification(nc_data, labels, tx, "NC", iterations)
         ac_ncs, f1_ncs, _ = xgboost_classification(ncs_data, labels, tx, "NC_genome+NC_proteome", iterations)
 
-        ac_sq_gc_nc, f1_sq_gc_nc, _ = xgboost_classification(sq_gc_nc_genome, labels, tx, "SL+GC+NC(genome)", iterations)
         ac_gen, f1_gen, _ = xgboost_classification(all_genome, labels, tx, "All(genome", iterations)
         ac_pro, f1_pro, _ = xgboost_classification(sq_nc_protein, labels, tx, "SL+NC(proteome)", iterations)
+
         ac_all, f1_all, class_hit_per = xgboost_voting_classification(data, labels, tx, "All", iterations)
         
         #p_hit Classification
@@ -284,8 +282,8 @@ def classification(relative_path):
         #Other Classifiers
         ac_other, f1_l_other = other_classifications(data, labels, tx, "All", iterations)
         
-        acc_xgboost.append(ac_1f + [ac_ncs[-1]] + [ac_pro[-1]] + [ac_sq_gc_nc[-1]] + [ac_gen[-1]] + [ac_all[-1]])
-        f1_xgboost.append(f1_1f + [f1_ncs[-1]] + [f1_pro[-1]] +  [f1_sq_gc_nc[-1]] +[f1_gen[-1]] + [f1_all[-1]])
+        acc_xgboost.append(ac_1f + [ac_ncs[-1]] + [ac_pro[-1]] + [ac_gen[-1]]  + [ac_all[-1]])
+        f1_xgboost.append(f1_1f + [f1_ncs[-1]] + [f1_pro[-1]] + [f1_gen[-1]]  + [f1_all[-1]])
         acc_other.append(ac_other + [ac_all[-1]])
         f1_other.append(f1_l_other + [f1_all[-1]])
     

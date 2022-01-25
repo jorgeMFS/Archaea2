@@ -45,17 +45,33 @@ def classification_structure(lst,map_lst):
     for tx in tax:
         clss_lst=[]
         labels=[]
+        test=[]
         lst_tx=[x[0] for x in map_lst if x[1]==tx]
         lst_tx=filter_insufficient_samples(lst,lst_tx,4)
         for l_tx, cnt in zip(lst_tx, list(range(len(lst_tx)))):
             for x in lst:
-                if l_tx in x:
+                if l_tx in x:                      
                     clss_lst.append(x[:9])
                     labels.append(cnt)
+                    test.append([l_tx] + x[:9])
+        
         clss_lst=np.array(clss_lst)
         labels=np.array(labels).astype('int32')
         np.save("../data/"+tx+'_'+'y_data.npy', labels)
         np.save("../data/"+tx+'_'+'x_data.npy', clss_lst)
+
+def test_taxa_map(lst,lst_tx):
+    for x in lst:
+        cnt=0
+        lx=[]
+        for l_tx in lst_tx:
+            if l_tx in x:
+                cnt+=1
+                lx.append(l_tx)
+            if cnt >1:
+                print(lx)
+                return False
+    return True   
 
 def filter_non_read(organism_info, taxa_map):
     organism_info=[org[1:] for org in organism_info]
@@ -80,7 +96,8 @@ if __name__ == "__main__":
     # unique_groups=list(set([x[1] for x in taxa_map]))
 
     archea_lst=merge_lists(organism_info,features)
-    organism_info=classification_structure(archea_lst,taxa_map)
     
+    organism_info=classification_structure(archea_lst,taxa_map)
+    print("classification dataset created!")
     
 
