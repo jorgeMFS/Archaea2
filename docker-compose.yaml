@@ -2,9 +2,9 @@ version: "3"
 
 services:
   src:
-    container_name: archaea
+    container_name: archaea2
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./:/Archaea/
+      - ./:/Archaea2/

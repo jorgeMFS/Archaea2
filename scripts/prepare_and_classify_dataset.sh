@@ -137,6 +137,3 @@ if [ ! -d "$DATASET_DIR" ]; then echo "Please run download_dataset.sh"; exit; fi
 PREPROCESS_FILES
 SEQ_FEATURES REPORTS_SEQ_FEATURES
 GenomeInfo "A"
-cd "../python_src/" || exit
-python3 create_classification_dataset.py
-python3 classification.py

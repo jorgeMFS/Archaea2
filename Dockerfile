@@ -21,9 +21,9 @@ RUN wget \
     && bash Miniconda3-latest-Linux-x86_64.sh -b \
     && rm -f Miniconda3-latest-Linux-x86_64.sh 
 
-ADD . /Archaea
+ADD . /Archaea2
 
-WORKDIR /Archaea
+WORKDIR /Archaea2
 
 RUN bash run.sh
 
