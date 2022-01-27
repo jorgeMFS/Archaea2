@@ -38,7 +38,7 @@ cd "../python_src/" || exit
 python3 create_classification_dataset.py
 python3 classification.py
 ```
-## Project structure:
+## Project structure
 * */scripts*: bash scripts
 * */python_src*: python3 scripts
 * */reports*: extrated features from pre-processing dataset
