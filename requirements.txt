@@ -1,5 +1,5 @@
 numpy==1.19.5
-openpyxl==2.4.8
-pandas==0.20.3
 scikit_learn==1.0.2
 xgboost==1.2.1
+pandas==1.4.0
+openpyxl==3.0.9

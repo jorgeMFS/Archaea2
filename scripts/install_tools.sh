@@ -22,7 +22,7 @@ conda install -c cobilab gto --yes
 Check_Installation "gto";
 conda install -c bioconda ac --yes
 Check_Installation "AC";
-conda install -c conda-forge ncbi-datasets-cli
+conda install -c conda-forge ncbi-datasets-cli --yes
 
 
 echo -e "\033[1;32mSuccessfully installed tools!\033[0m";
