@@ -25,6 +25,4 @@ ADD . /Archaea2
 
 WORKDIR /Archaea2
 
-RUN bash run.sh
-
 CMD tail -f >> /dev/null
