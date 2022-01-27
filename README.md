@@ -10,7 +10,7 @@
 git clone git@github.com:jorgeMFS/Archaea2.git
 cd Archaea2
 docker-compose build
-docker-compose up -d && docker exec -it archaea bash && docker-compose down
+docker-compose up -d && docker exec -it archaea2 bash && docker-compose down
 ```
 ## Install Tools
 Get Archaea project using:

@@ -21,7 +21,7 @@ Check_Installation "efetch";
 conda install -c cobilab gto --yes 
 Check_Installation "gto";
 conda install -c bioconda ac --yes
-Check_Installation "ac";
+Check_Installation "AC";
 conda install -c conda-forge ncbi-datasets-cli
 
 
