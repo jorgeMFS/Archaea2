@@ -51,3 +51,22 @@ python3 classification.py
 - Python3.6
 - Anaconda
 - or docker and docker-compose.
+
+## Cite
+Please cite this work as:
+```
+Silva, Jorge Miguel, et al. "Feature-Based Classification of Archaeal Sequences Using Compression-Based Methods." Iberian Conference on Pattern Recognition and Image Analysis. Springer, Cham, 2022.
+```
+
+### BibTeX
+
+```
+@inproceedings{silva2022feature,
+  title={Feature-Based Classification of Archaeal Sequences Using Compression-Based Methods},
+  author={Silva, Jorge Miguel and Pratas, Diogo and Caetano, T{\^a}nia and Matos, S{\'e}rgio},
+  booktitle={Iberian Conference on Pattern Recognition and Image Analysis},
+  pages={309--320},
+  year={2022},
+  organization={Springer}
+}
+```
